@@ -8,6 +8,8 @@ enum class RE_GameState {
 	BEGONE
 };
 
+extern SDL_Window* window;
+
 class RE_GameLoop
 {
 	public:
@@ -19,6 +21,5 @@ class RE_GameLoop
 		void graphicsProcess();
 		RE_GameState activeState;
 	private:
-		SDL_Window* window;
 		void processInput(); // I have no idea what this is gonna do to the engine
 };

@@ -13,6 +13,24 @@ RE_GameContainer::~RE_GameContainer()
 {
 }
 
+void perspectiveModeGL(int scrw,int scrh) { // This code was taken from the OpenBLOX Repository.
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(70.0, scrw / scrh, 0.1, 1024.0);
+
+    gluLookAt(  0.0, 0.0, 0.0,      // Camera position
+                0.0, 0.0, 1.0,      // Look at
+                0.0, 1.0, 0.0);     // Up direction
+    
+    // Configure the polygon format
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+
+    // Set up the modelview matrix
+    glMatrixMode(GL_MODELVIEW);
+}
+
+
 void RE_GameContainer::run() {
 	printf("Real Engine (legit 2025)\n");
 	initialize();
@@ -46,4 +64,6 @@ void RE_GameContainer::initialize() {
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	glClearColor(0.0f,0.0f,0.0f, 1.0f);
+
+	perspectiveModeGL(sw,sh);
 }

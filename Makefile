@@ -10,8 +10,10 @@ CPPFILES := $(wildcard .$(SOURCE)/*.cpp)
 
 OBJS		:=  $(CPPFILES:.$(SOURCE)/%.cpp=.$(CLASSES)/%.o)
 
+FLAGS	:= -g 
+
 build: $(OBJS)
-	$(CC) $(OBJS) -fsanitize=address -g $(LIBS) -o $(TARGET)
+	$(CC) $(OBJS) $(FLAGS) $(LIBS) -o $(TARGET)
 
 .$(CLASSES)/%.o: .$(SOURCE)/%.cpp
 	$(CC) $(LIBS) -c $< -o $@

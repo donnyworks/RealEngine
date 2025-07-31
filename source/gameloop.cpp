@@ -31,20 +31,34 @@ void RE_GameLoop::gameLoop() { // Note to self: ISO C++ doesn't exactly like it 
 		processInput();
 		graphicsProcess();
 	}
+	//SDL_Quit();
 }
 
 void RE_GameLoop::graphicsProcess() { // Note to self: ISO C++ doesn't exactly like it when you do that whole "no type" shit dumbass
+	//printf("Start of frame");
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnableClientState(GL_COLOR_ARRAY);
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f,0.0f,0.0f); //This is red
-	glVertex2f(0,0);
-	glVertex2f(0,15);
-	glVertex2f(15,0);
-	glVertex2f(15,15);
-	
-	glEnd();
+	// More code blatently stolen (not afraid to admit that)
+	glPushMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glDisable(GL_CULL_FACE);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glEnable(GL_DEPTH_TEST); 
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    // lmao
+	//printf("Begin rendering blocks\n");
+    //for (int i = 0; i < 1024; i++) {
+    	//printf("Rendering block %i\n",i);
+    	//Globals::blocks[i].render(0,0,0,1.0f);
+    //}
+    //printf("Done rendering blocks\n");
+	//glPopMatrix();
+    //glFlush();
 
 	if (Globals::window != nullptr) {
 		SDL_GL_SwapWindow(Globals::window);

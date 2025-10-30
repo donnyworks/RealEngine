@@ -1,4 +1,4 @@
-TARGET	:= engine
+TARGET	:= realengine.so
 CC	:= g++
 EMCC	:= emcc
 LIBS	:= -lSDL2 -lGL -lGLEW -lGLU
@@ -15,13 +15,13 @@ OBJS	:=  $(CPPFILES:.$(SOURCE)/%.cpp=.$(CLASSES)/%.o)
 
 EMOBJS	:=  $(CPPFILES:.$(SOURCE)/%.cpp=.$(CLASSES)/%.wasm)
 
-FLAGS	:= -g 
+FLAGS	:= -g
 
 build: $(OBJS)
-	$(CC) $(OBJS) $(FLAGS) $(LIBS) -o $(TARGET)
+	$(CC) $(OBJS) -shared $(FLAGS) $(LIBS) -o $(TARGET)
 
 .$(CLASSES)/%.o: .$(SOURCE)/%.cpp
-	$(CC) $(LIBS) -c $< -o $@
+	$(CC) -fPIC $(LIBS) -c $< -o $@
 
 clean:
 	rm -rf .$(CLASSES)
@@ -35,10 +35,10 @@ emclean:
 	mkdir .$(EMXPORT)
 
 .$(CLASSES)/%.wasm: .$(SOURCE)/%.cpp
-	$(EMCC) $(LIBS) -sLEGACY_GL_EMULATION -s USE_SDL=2 -c $< -o $@
+	$(EMCC) $(LIBS) -DEMSCRIPTEN -sLEGACY_GL_EMULATION -s USE_SDL=2 -c $< -o $@
 
 emscripten:
-	embuilder build sdl2 sdl2_ttf sdl2_image sdl2_image_jpg sdl2_image_png
+	embuilder build --verbose sdl2 sdl2_image
 	make embuild
 
 embuild: $(EMOBJS)

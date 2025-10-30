@@ -43,7 +43,7 @@ void RE_GameContainer::initialize() {
 	Globals::window = SDL_CreateWindow("Real Engine",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,sw,sh,SDL_WINDOW_OPENGL);
 	printf("Window intitialized\n");
 	if (Globals::window == nullptr) {
-		printf("Fatal error! We're so fucked! (container.cpp, CreateWindow)");
+		printf("Fatal error in container.cpp, calling CreateWindow");
 		SDL_Quit();
 	}
 
@@ -51,19 +51,20 @@ void RE_GameContainer::initialize() {
 
 	SDL_GLContext yourmom = SDL_GL_CreateContext(Globals::window);
 	if (yourmom == nullptr) {
-		printf("Fatal error! We're so fucked! (container.cpp, CreateContext)");
+		printf("Fatal error in container.cpp, calling CreateContext");
 		SDL_Quit();
 	}
 
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
-		printf("Fatal error! We're so fucked! (container.cpp, glewInit)");
+		printf("Fatal error in container.cpp, calling glewInit");
 		SDL_Quit();
 	}
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	glClearColor(0.0f,0.0f,0.0f, 1.0f);
-
+	#ifndef EMSCRIPTEN
 	perspectiveModeGL(sw,sh);
+	#endif
 }

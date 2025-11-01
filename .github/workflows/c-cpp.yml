@@ -17,5 +17,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: libsdl-org/setup-sdl@v1
+    - uses: NishkarshRaj/OpenGL_Actions@1.0
     - name: make
       run: make clean build

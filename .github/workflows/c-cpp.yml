@@ -22,8 +22,8 @@ jobs:
       
     - name: Install packages
       run: sudo apt-get install --fix-missing libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libglew-dev libsdl2-dev
-    - name: make
-      run: make clean build
+    - name: Build with Make
+      run: make clean build launcherbuild
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v5.0.0
       with:

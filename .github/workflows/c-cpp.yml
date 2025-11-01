@@ -16,7 +16,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: libsdl-org/setup-sdl@v1
-    - uses: NishkarshRaj/OpenGL_Actions@1.0
+    - uses: libsdl-org/setup-sdl@v1    
+    - name: Install dependencies (Ubuntu)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libxrandr-dev libxcursor-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev mesa-utils
+
     - name: make
       run: make clean build

@@ -30,6 +30,8 @@ launcherbuild:
 
 clean:
 	rm -rf .$(CLASSES)
+	rm -rf $(BINPATH)
+	mkdir $(BINPATH)
 	mkdir .$(CLASSES)
 
 test: clean build launcherbuild

@@ -16,8 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: libsdl-org/setup-sdl@v1    
-    - uses: openrndr/setup-opengl@v1.1
-
+    - uses: libsdl-org/setup-sdl@v1
+    - name: Update packages
+      run: sudo apt-get update
+      
+    - name: Install packages
+      run: sudo apt-get install --fix-missing libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
     - name: make
       run: make clean build

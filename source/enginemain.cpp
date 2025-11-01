@@ -1,7 +1,7 @@
 #include <iostream>
 #include "container.h"
 
-int main(int argv, char **argc) {
+extern int main(int argv, char **argc) {
 	//SDL_Init(SDL_INIT_EVERYTHING);
 	RE_GameContainer container;
 	container.run();

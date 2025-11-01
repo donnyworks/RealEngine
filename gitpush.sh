@@ -1,5 +1,6 @@
 #!/bin/bash
-rm engine
+rm realengine
+rm realengine.so
 rm -rf classes
 git add *
 git commit -m "$1"

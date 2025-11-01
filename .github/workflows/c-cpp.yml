@@ -21,6 +21,6 @@ jobs:
       run: sudo apt-get update
       
     - name: Install packages
-      run: sudo apt-get install --fix-missing libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libglew-dev
+      run: sudo apt-get install --fix-missing libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libglew-dev libsdl2-dev
     - name: make
       run: make clean build

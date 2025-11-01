@@ -1,0 +1,21 @@
+name: Build Linux
+  # You may pin to the exact commit or the version.
+  # uses: libsdl-org/setup-sdl@f0131347757b3b78ed886b7f0c36b19e26aa2937
+
+          
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: libsdl-org/setup-sdl@v1
+    - name: make
+      run: make clean build

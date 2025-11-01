@@ -1,4 +1,5 @@
 TARGET	:= realengine.so
+BINPATH	:= ./bin/
 LAUNCHER	:= realengine
 CC	:= g++
 EMCC	:= emcc
@@ -19,10 +20,10 @@ EMOBJS	:=  $(CPPFILES:.$(SOURCE)/%.cpp=.$(CLASSES)/%.wasm)
 FLAGS	:= -g
 
 build: $(OBJS)
-	$(CC) $(OBJS) -shared $(FLAGS) $(LIBS) -o $(TARGET)
+	$(CC) $(OBJS) -shared $(FLAGS) $(LIBS) -o $(BINPATH)$(TARGET)
 
 launcherbuild:
-	$(CC) -DLINUX .$(SOURCE)/launcher/main.cpp -o $(LAUNCHER)
+	$(CC) -DLINUX .$(SOURCE)/launcher/main.cpp -o $(BINPATH)$(LAUNCHER)
 
 .$(CLASSES)/%.o: .$(SOURCE)/%.cpp
 	$(CC) -fPIC $(LIBS) -c $< -o $@
@@ -32,7 +33,7 @@ clean:
 	mkdir .$(CLASSES)
 
 test: clean build launcherbuild
-	./$(LAUNCHER)
+	$(BINPATH)$(LAUNCHER)
 
 emclean:
 	rm -rf .$(EMXPORT)

@@ -22,21 +22,21 @@ int main(int argv, char **argc) {
 	if (hModule == NULL) {
 	    // Handle error, e.g., the DLL was not found or could not be loaded
 	    DWORD error = GetLastError(); // Get extended error information
-		printf("Failed to load RealEngine library!");
+		printf("Failed to load RealEngine library!\n");
 	} else {
 		enginemain myFunction = (enginemain)GetProcAddress(hModule, "main");
 
 		if (myFunction == NULL) {
 		    // Handle error, e.g., the function was not found in the DLL
 		    DWORD error = GetLastError();
-			printf("Failed to get 'main' function!");
+			printf("Failed to get 'main' function!\n");
 		    // ...
 		} else {
 		    // Now you can call the function through the pointer
 		    int result = myFunction(argv,argc);
 		    FreeLibrary(hModule);
 			hModule = NULL;
-			return result
+			return result;
 		}
 	}
 	return -1;

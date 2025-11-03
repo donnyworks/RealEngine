@@ -16,7 +16,29 @@ typedef int (*enginemain)(int, char**);
 
 int main(int argv, char **argc) {
 	#ifdef WINDOWS
-	printf("Sorry, there is currently no Real Engine Launcher implementation for Windows.\r\n");
+	//printf("Sorry, there is currently no Real Engine Launcher implementation for Windows.\r\n");
+	HMODULE hModule = LoadLibrary("realengine.dll");
+
+	if (hModule == NULL) {
+	    // Handle error, e.g., the DLL was not found or could not be loaded
+	    DWORD error = GetLastError(); // Get extended error information
+		printf("Failed to load RealEngine library!");
+	} else {
+		enginemain myFunction = (enginemain)GetProcAddress(hModule, "main");
+
+		if (myFunction == NULL) {
+		    // Handle error, e.g., the function was not found in the DLL
+		    DWORD error = GetLastError();
+			printf("Failed to get 'main' function!");
+		    // ...
+		} else {
+		    // Now you can call the function through the pointer
+		    int result = myFunction(argv,argc);
+		    FreeLibrary(hModule);
+			hModule = NULL;
+			return result
+		}
+	}
 	return -1;
 	#endif
 	#ifdef LINUX

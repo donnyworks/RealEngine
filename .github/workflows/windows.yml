@@ -1,0 +1,28 @@
+name: Build Windows
+  # You may pin to the exact commit or the version.
+  # uses: libsdl-org/setup-sdl@f0131347757b3b78ed886b7f0c36b19e26aa2937
+
+          
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: libsdl-org/setup-sdl@v1
+    - name: Install packages
+      uses: f3d-app/install-mesa-windows-action@v1 
+    - name: Build with Make
+      run: make clean winbuild winlauncherbuild
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v5.0.0
+      with:
+        name: Windows Build
+        path: bin

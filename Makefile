@@ -2,6 +2,7 @@ TARGET	:= realengine.so
 BINPATH	:= ./bin/
 LAUNCHER	:= realengine
 CC	:= g++
+C	:= gcc
 EMCC	:= emcc
 LIBS	:= -lSDL2 -lGL -lGLEW -lGLU
 
@@ -23,7 +24,7 @@ build: $(OBJS)
 	$(CC) $(OBJS) -shared $(FLAGS) $(LIBS) -o $(BINPATH)$(TARGET)
 
 launcherbuild:
-	$(CC) -DLINUX .$(SOURCE)/launcher/main.cpp -o $(BINPATH)$(LAUNCHER)
+	$(C) -DLINUX .$(SOURCE)/launcher/main.c -o $(BINPATH)$(LAUNCHER)
 
 .$(CLASSES)/%.o: .$(SOURCE)/%.cpp
 	$(CC) -fPIC $(LIBS) -c $< -o $@

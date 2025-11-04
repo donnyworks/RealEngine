@@ -29,11 +29,16 @@ jobs:
     - name: Copy GLEW Headers and Libraries
       run: |
         Copy-Item glew_extracted\glew-2.2.0\include -Destination .\include -Recurse
-        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\include -Destination .\include -Recurse
+        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\include\SDL2 -Destination .\include\SDL2 -Recurse
         Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\lib -Destination .\lib
         Copy-Item glew_extracted\glew-2.2.0\lib\Release\Win32\glew32.lib -Destination .\lib
         # If using static linking, copy glew32s.lib instead:
         # Copy-Item glew_extracted\glew-2.2.0\lib\Release\Win32\glew32s.lib -Destination .\lib
+    - name: Include Artifact
+      uses: actions/upload-artifact@v5.0.0
+      with:
+        name: Include Files
+        path: include
     - name: Build with Make
       run: make clean winbuild winlauncherbuild
     - name: Upload a Build Artifact

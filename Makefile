@@ -4,7 +4,7 @@ LAUNCHER	:= realengine
 CC	:= g++
 C	:= gcc
 EMCC	:= emcc
-LIBS	:= -lSDL2 -lGL -lGLEW -lGLU
+LIBS	:= -lSDL2 -lGL -lGLEW -lGLU -Iinclude
 
 CLASSES := /classes
 

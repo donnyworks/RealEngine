@@ -1,6 +1,8 @@
 TARGET	:= realengine.so
+WINTARGET	:= realengine.dll
 BINPATH	:= ./bin/
 LAUNCHER	:= realengine
+WINLAUNCHER	:= realengine.exe
 CC	:= g++
 C	:= gcc
 EMCC	:= emcc
@@ -27,10 +29,10 @@ launcherbuild:
 	$(C) -DLINUX .$(SOURCE)/launcher/main.c -o $(BINPATH)$(LAUNCHER)
 
 winbuild: $(OBJS)
-	$(CC) $(LIBS) $(OBJS) -shared $(FLAGS) -o $(BINPATH)$(TARGET)
+	$(CC) $(OBJS) -shared $(FLAGS) -o $(BINPATH)$(WINTARGET)
 
 winlauncherbuild:
-	$(C) -DWINDOWS .$(SOURCE)/launcher/main.c -o $(BINPATH)$(LAUNCHER)
+	$(C) -DWINDOWS .$(SOURCE)/launcher/main.c -o $(BINPATH)$(WINLAUNCHER)
 
 .$(CLASSES)/%.o: .$(SOURCE)/%.cpp
 	$(CC) -fPIC $(LIBS) -c $< -o $@

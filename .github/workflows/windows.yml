@@ -26,10 +26,10 @@ jobs:
 
     - name: Copy GLEW Headers and Libraries
       run: |
-        Copy-Item glew_extracted\glew-2.1.0\include\GL -Destination .\include -Recurse
-        Copy-Item glew_extracted\glew-2.1.0\lib\Release\Win32\glew32.lib -Destination .\lib
+        Copy-Item glew_extracted\glew-2.2.0\include\GL -Destination .\include -Recurse
+        Copy-Item glew_extracted\glew-2.2.0\lib\Release\Win32\glew32.lib -Destination .\lib
         # If using static linking, copy glew32s.lib instead:
-        # Copy-Item glew_extracted\glew-2.1.0\lib\Release\Win32\glew32s.lib -Destination .\lib
+        # Copy-Item glew_extracted\glew-2.2.0\lib\Release\Win32\glew32s.lib -Destination .\lib
     - name: Build with Make
       run: make clean winbuild winlauncherbuild
     - name: Upload a Build Artifact

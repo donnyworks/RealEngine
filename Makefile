@@ -29,7 +29,7 @@ launcherbuild:
 	$(C) -DLINUX .$(SOURCE)/launcher/main.c -o $(BINPATH)$(LAUNCHER)
 
 winbuild: $(OBJS)
-	$(CC) $(OBJS) -shared $(FLAGS) -o $(BINPATH)$(WINTARGET)
+	$(CC) $(OBJS) -shared $(FLAGS) -Llib -o $(BINPATH)$(WINTARGET)
 
 winlauncherbuild:
 	$(C) -DWINDOWS .$(SOURCE)/launcher/main.c -o $(BINPATH)$(WINLAUNCHER)

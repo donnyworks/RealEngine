@@ -22,11 +22,15 @@ jobs:
     - name: Download GLEW
       run: |
         Invoke-WebRequest -Uri "https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip" -OutFile glew.zip
+        Invoke-WebRequest -Uri "https://github.com/libsdl-org/SDL/releases/download/release-2.32.6/SDL2-devel-2.32.6-mingw.zip" -OutFile sdl2.zip
         Expand-Archive -Path glew.zip -DestinationPath glew_extracted
+        Expand-Archive -Path sdl2.zip -DestinationPath sdl2_extracted
 
     - name: Copy GLEW Headers and Libraries
       run: |
         Copy-Item glew_extracted\glew-2.2.0\include -Destination .\include -Recurse
+        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\include -Destination .\include -Recurse
+        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\lib -Destination .\lib
         Copy-Item glew_extracted\glew-2.2.0\lib\Release\Win32\glew32.lib -Destination .\lib
         # If using static linking, copy glew32s.lib instead:
         # Copy-Item glew_extracted\glew-2.2.0\lib\Release\Win32\glew32s.lib -Destination .\lib

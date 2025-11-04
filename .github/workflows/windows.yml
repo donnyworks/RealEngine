@@ -21,7 +21,7 @@ jobs:
       uses: ssciwr/setup-mesa-dist-win@v2.0.0
     - name: Download GLEW
       run: |
-        Invoke-WebRequest -Uri "https://sourceforge.net/projects/glew/files/glew/2.1.0/glew-2.1.0-win32.zip/download" -OutFile glew.zip
+        Invoke-WebRequest -Uri "https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip" -OutFile glew.zip
         Expand-Archive -Path glew.zip -DestinationPath glew_extracted
 
     - name: Copy GLEW Headers and Libraries

@@ -6,7 +6,7 @@ WINLAUNCHER	:= realengine.exe
 CC	:= g++
 C	:= gcc
 EMCC	:= emcc
-LIBS	:= -lSDL2 -lGL -lGLEW -lGLU -Iinclude
+LIBS	:= -lSDL2 -lGL -lGLEW -lGLU
 
 CLASSES := /classes
 
@@ -29,13 +29,13 @@ launcherbuild:
 	$(C) -DLINUX .$(SOURCE)/launcher/main.c -o $(BINPATH)$(LAUNCHER)
 
 winbuild: $(OBJS)
-	$(CC) $(OBJS) -shared $(FLAGS) -Llib -L./lib -L.\lib $(LIBS) -o $(BINPATH)$(WINTARGET)
+	$(CC) $(OBJS) -shared $(FLAGS) -Llib -L./lib -L.\lib -Ilib $(LIBS) -o $(BINPATH)$(WINTARGET)
 
 winlauncherbuild:
 	$(C) -DWINDOWS .$(SOURCE)/launcher/main.c -o $(BINPATH)$(WINLAUNCHER)
 
 .$(CLASSES)/%.o: .$(SOURCE)/%.cpp
-	$(CC) -fPIC $(LIBS) -c $< -o $@
+	$(CC) -fPIC $(LIBS) -Iinclude -c $< -o $@
 
 clean:
 	rm -rf .$(CLASSES)

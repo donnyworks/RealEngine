@@ -7,6 +7,7 @@ CC	:= g++
 C	:= gcc
 EMCC	:= emcc
 LIBS	:= -lSDL2 -lGL -lGLEW -lGLU
+WINLIBS	:= -lSDL2 -lopengl32 -lglew32 -lglu32 -Iinclude
 
 CLASSES := /classes
 
@@ -29,7 +30,7 @@ launcherbuild:
 	$(C) -DLINUX .$(SOURCE)/launcher/main.c -o $(BINPATH)$(LAUNCHER)
 
 winbuild: $(OBJS)
-	$(CC) $(OBJS) -shared $(FLAGS) -Llib -L./lib -L.\lib -Ilib $(LIBS) -o $(BINPATH)$(WINTARGET)
+	$(CC) $(OBJS) -shared $(FLAGS) -Llib -L./lib -L.\lib -Ilib $(WINLIBS) -o $(BINPATH)$(WINTARGET)
 
 winlauncherbuild:
 	$(C) -DWINDOWS .$(SOURCE)/launcher/main.c -o $(BINPATH)$(WINLAUNCHER)

@@ -16,6 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: SDL2 install
     - uses: libsdl-org/setup-sdl@v1
     - name: Install packages
       uses: ssciwr/setup-mesa-dist-win@v2.0.0
@@ -39,8 +40,15 @@ jobs:
       with:
         name: Include Files
         path: include
-    - name: Build with Make
-      run: make clean winbuild winlauncherbuild
+    - name: Build Launcher
+      run: make clean winlauncherbuild
+    - name: Launcher Artifact
+      uses: actions/upload-artifact@v5.0.0
+      with:
+        name: Windows Launcher
+        path: bin
+    - name: Build Libraries
+      run: make winbuild
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v5.0.0
       with:

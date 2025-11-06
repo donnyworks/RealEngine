@@ -31,7 +31,8 @@ jobs:
       run: |
         Copy-Item glew_extracted\glew-2.2.0\include -Destination .\include -Recurse
         Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\include\SDL2 -Destination .\include\SDL2 -Recurse
-        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\lib -Destination .\lib
+        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\lib -Destination .\lib -Recurse
+        Copy-Item sdl2_extracted\SDL2-2.32.6\x86_64-w64-mingw32\bin\SDL2.dll -Destination .\bin
         Copy-Item glew_extracted\glew-2.2.0\lib\Release\x64\glew32.lib -Destination .\lib\libglew32.lib
         # If using static linking, copy glew32s.lib instead:
         # Copy-Item glew_extracted\glew-2.2.0\lib\Release\x64\glew32s.lib -Destination .\lib

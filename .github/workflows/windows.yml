@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Firstboot Cleanup
+      run: make clean
     - name: SDL2 install
       uses: libsdl-org/setup-sdl@v1
     - name: Install packages
@@ -48,7 +50,7 @@ jobs:
         name: Include Files
         path: include
     - name: Build Launcher
-      run: make clean winlauncherbuild
+      run: make winlauncherbuild
     - name: Launcher Artifact
       uses: actions/upload-artifact@v5.0.0
       with:
